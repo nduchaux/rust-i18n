@@ -274,19 +274,10 @@ fn generate_code(
     let mut all_translations = Vec::<proc_macro2::TokenStream>::new();
 
     translations.iter().for_each(|(locale, trs)| {
-        let mut sub_trs = Vec::<proc_macro2::TokenStream>::new();
-
         trs.iter().for_each(|(k, v)| {
-            let k = k.to_string();
-            let v = v.to_string();
-            sub_trs.push(quote! {
-                (#k, #v)
+            all_translations.push(quote! {
+                backend.add_translations(#locale, &std::collections::HashMap::from([(#k, #v)]));
             });
-        });
-
-        all_translations.push(quote! {
-            let trs = [#(#sub_trs),*];
-            backend.add_translations(#locale, &trs.into_iter().collect());
         });
     });
 
