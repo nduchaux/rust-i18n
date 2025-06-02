@@ -417,8 +417,8 @@ fn generate_code(
             }
         }
 
-        pub(crate) use __rust_i18n_t as _rust_i18n_t;
-        pub(crate) use __rust_i18n_tkv as _rust_i18n_tkv;
+        pub use __rust_i18n_t as _rust_i18n_t;
+        pub use __rust_i18n_tkv as _rust_i18n_tkv;
     }
 }
 
